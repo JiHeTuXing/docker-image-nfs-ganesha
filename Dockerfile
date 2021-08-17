@@ -3,9 +3,10 @@ MAINTAINER Mitchell Hewes <me@mitcdh.com>
 
 # install prerequisites
 RUN DEBIAN_FRONTEND=noninteractive \
+ && apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 34DC57CA \
  && apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 3FE869A9 \
- && echo "deb http://ppa.launchpad.net/gluster/nfs-ganesha-2.5/ubuntu xenial main" > /etc/apt/sources.list.d/nfs-ganesha-2.5.list \
- && echo "deb http://ppa.launchpad.net/gluster/libntirpc-1.5/ubuntu xenial main" > /etc/apt/sources.list.d/libntirpc-1.5.list \
+ && echo "deb http://ppa.launchpad.net/nfs-ganesha/nfs-ganesha-3.0/ubuntu/  xenial main" > /etc/apt/sources.list.d/nfs-ganesha-3.0.list \
+ && echo "deb http://ppa.launchpad.net/nfs-ganesha/libntirpc-3.0/ubuntu/  xenial main" > /etc/apt/sources.list.d/libntirpc-3.0.list \
  && echo "deb http://ppa.launchpad.net/gluster/glusterfs-3.13/ubuntu xenial main" > /etc/apt/sources.list.d/glusterfs-3.13.list \
  && apt-get update \
  && apt-get install -y netbase nfs-common dbus nfs-ganesha nfs-ganesha-vfs glusterfs-common \
@@ -18,6 +19,7 @@ RUN DEBIAN_FRONTEND=noninteractive \
 
 # Add startup script
 COPY start.sh /
+RUN chmod +x /start.sh
 
 # NFS ports and portmapper
 EXPOSE 2049 38465-38467 662 111/udp 111
