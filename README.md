@@ -53,13 +53,18 @@ EXPORT
 }
 ````
 
-### Usage
+### old Usage
 ```bash
 docker run -d \
 --name nfs \
 -v /local/export/path:/export \
 mitcdh/nfs-ganesha \
 ```
+### my test usage
+```bash
+docker run -d --net=host --privileged=true --name=nfs_server -v /local/export:/export kylin/nfs-ganesha
+```
+
 
 ### Credits
 * [janeczku/docker-nfs-ganesha](https://github.com/janeczku/docker-nfs-ganesha)
